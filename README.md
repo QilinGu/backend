@@ -55,26 +55,6 @@ As we're using Docker, our backend is completely portable! Just make sure to hav
 
 * POST _/maprender_
   * Request Header: User's JWT Token 
-  * Request Body: `{latitude:float, longitude:float}`
-  * Response: 
-  ```
-  {
-     image_url: string, 
-     weather: "sunny"|"rainy"|"cloudy", 
-     render_objects:[
-        {
-         type: "player"|"ai"|"marker"|"item", 
-         description: string, 
-         latitude: float,
-         longitude: float,
-         ...
-        }
-      ]
-  }
-  ```
-    
-* POST _/mapupdate_
-  * Request Header: User's JWT Token
   * Request Body:
   ```
   {
