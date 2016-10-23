@@ -17,7 +17,7 @@ As we're using Docker, our backend is completely portable! Just make sure to hav
 ## API Routes
 
 * POST _/signup_
-  * Request Body: `{username:string, password:string}` 
+  * Request Body: `{username:string, password:string, class_id:int}` 
   * Response: `{status:int, message:"success"|"failure"}`
 * POST _/login_
   * Request Body: `{username:string, password:string}`
