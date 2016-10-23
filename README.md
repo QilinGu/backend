@@ -34,7 +34,7 @@ As we're using Docker, our backend is completely portable! Just make sure to hav
   * Request: User's JWT Token 
   * Request Body: `{latitude:float, longitude:float, degrees_north:int, radius:int}`
   * Response: 
-	```javascript
+	```
     {
      image_url: string, 
      weather: "sunny"|"rainy"|"cloudy", 
