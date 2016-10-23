@@ -8,6 +8,7 @@ from random import random, uniform
 
 #Get API key from .env
 key = os.getenv("GOOGLE_API_KEY")
+
 def get_map(location):
     #Get latitude, longitude from location dict
     lat  = location['latitude']

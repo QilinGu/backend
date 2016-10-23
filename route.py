@@ -7,14 +7,14 @@ import decorators
 app = Flask(__name__)
 
 @app.route('/', methods=['POST', 'GET'])
-def home():
+def home_route():
   return json.jsonify({
     "status": 200,
     "message": "Roam Backend API v1"
   })
 
 @app.route('/signup', methods=['POST'])
-def signup():
+def signup_route():
   request_dict = request.get_json(force=True, silent=True)
   username = request_dict.get("username")
   password = request_dict.get("password")
@@ -36,7 +36,7 @@ def signup():
   })
 
 @app.route('/login', methods=['POST'])
-def login():
+def login_route():
   request_dict = request.get_json(force=True, silent=True)
   username = request_dict.get("username")
   password = request_dict.get("password")
@@ -67,7 +67,7 @@ def login():
 
 @app.route('/user/me/account', methods=['GET', 'POST'])
 @decorators.auth_protected
-def user_account():
+def user_account_route():
   jwt_token = g.jwt_token
   user_id = jwt_token.get("id")
   
@@ -110,7 +110,7 @@ def user_account():
 
 @app.route('/maprender', methods=['POST'])
 @decorators.auth_protected
-def maprender():
+def maprender_route():
   request_dict = request.get_json(force=True, silent=True)
   if not isinstance(request_dict, dict):
     response = json.jsonify({
