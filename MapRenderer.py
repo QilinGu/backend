@@ -19,17 +19,17 @@ def hello():
 
 #Function to return nearby maps based off of last map's center
 @app.route('/maprender', methods=['POST'])
-def update_map():
-    obj = json.loads(request.data)
-    x = obj['x']
-    y = obj['y']
+def map_render():
+    obj = request.get_json(force=True)
+    x = obj.get('x',0)
+    y = obj.get('y', 0)
     center = obj['center']
     res_map = maprender.get_new_map(x , y, center)
     return json.jsonify({"image_url": res_map})
 
 
 
-loc = {'latitude': 25.7721638,'longitude': -80.2182310}
+# loc = {'latitude': 25.7721638,'longitude': -80.2182310}
 #map_render(loc)
 #map_render2({'latitude': (25.7721638),'longitude': (-80.2182310 - calc_distance_degrees(640,16))}, 0)
 #print update_map("top-left", loc)
