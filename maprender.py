@@ -4,6 +4,7 @@ import requests
 from StringIO import StringIO
 import time
 import os
+from random import random, uniform
 
 #Get API key from .env
 key = os.getenv("GOOGLE_API_KEY")
@@ -30,6 +31,29 @@ def get_new_map(x,y,center):
     add_lon = calc_distance_degrees(640,16) * x
     return get_map({'latitude': (center['latitude'] + add_lat),'longitude': (center['longitude'] + add_lon)})
 
+def get_objects(num, center):
+    obj = dict()
+    for i in range(num):
+        if i <5:
+            lon = calc_distance_degrees(uniform(15,50), 16)
+            lat = calc_distance_degrees(uniform(15,50), 16)
+        else:
+            lon = calc_distance_degrees(uniform(15,320), 16)
+            lat = calc_distance_degrees(uniform(15,307.5), 16)
+        if random() > 0.5:
+            lon * -1
+        if random() > 0.5:
+            lat * -1
+        enemy_name = "enemy%d" % i
+        obj[enemy_name] = {
+        "latitude": center["latitude"] + lat,
+        "longitude": center["longitude"] + lon
+        }
+    return obj
+
 #given number of pixels and zoom level, calculate the distance in latitudinal or longitudinal degrees
 def calc_distance_degrees(distance,zoom):
     return (1.0*distance/256)*(360.0 / 2**zoom)
+
+# get_map({'latitude': 25.7721638,'longitude': -80.2182310})
+#print get_objects(15,{'latitude': 25.7721638,'longitude': -80.2182310})
