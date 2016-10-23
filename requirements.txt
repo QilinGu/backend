@@ -7,6 +7,7 @@ MarkupSafe==0.23
 psycopg2==2.6.2
 py-bcrypt==0.4
 PyJWT==1.4.2
+pyowm==2.5.0
 redis==2.10.5
 virtualenv==15.0.3
 Werkzeug==0.11.11
