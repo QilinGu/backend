@@ -46,10 +46,10 @@ As we're using Docker, our backend is completely portable! Just make sure to hav
       hp: int, 
       xp: int, 
       inventory: [{
-        id: int, quantity: int,
-        name: string, description: string
+        id: int, quantity: int, 
+        description: string
       }],
-      xp_history: [int]
+      xp_history: [int(id)]
   }
   ```
 
