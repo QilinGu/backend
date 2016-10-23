@@ -39,7 +39,7 @@ CREATE TABLE users(
 CREATE TABLE users_items(
   user_id int NOT NULL REFERENCES users (id),
   item_id int NOT NULL REFERENCES items (id),
-  quantity int
+  quantity int, 
   PRIMARY KEY (user_id, item_id)
 );
 
