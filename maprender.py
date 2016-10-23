@@ -32,7 +32,7 @@ def get_new_map(x,y,center):
     return get_map({'latitude': (center['latitude'] + add_lat),'longitude': (center['longitude'] + add_lon)})
 
 def get_objects(num, center):
-    obj = dict()
+    obj = []
     for i in range(num):
         if i <5:
             lon = calc_distance_degrees(uniform(15,50), 16)
@@ -45,10 +45,11 @@ def get_objects(num, center):
         if random() > 0.5:
             lat * -1
         enemy_name = "enemy%d" % i
-        obj[enemy_name] = {
+        obj.append({
+        "type" : "ai",
         "latitude": center["latitude"] + lat,
         "longitude": center["longitude"] + lon
-        }
+        })
     return obj
 
 #given number of pixels and zoom level, calculate the distance in latitudinal or longitudinal degrees
@@ -56,4 +57,4 @@ def calc_distance_degrees(distance,zoom):
     return (1.0*distance/256)*(360.0 / 2**zoom)
 
 # get_map({'latitude': 25.7721638,'longitude': -80.2182310})
-#print get_objects(15,{'latitude': 25.7721638,'longitude': -80.2182310})
+# print get_objects(15,{'latitude': 25.7721638,'longitude': -80.2182310})
