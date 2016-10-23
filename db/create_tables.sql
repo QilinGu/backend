@@ -1,0 +1,48 @@
+CREATE TABLE classes (
+  id SERIAL,
+  name varchar(30) NOT NULL UNIQUE,
+  description text NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE items (
+  id SERIAL,
+  name varchar(30) NOT NULL UNIQUE,
+  description text NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE ais(
+  id SERIAL,
+  name varchar(30) NOT NULL UNIQUE,
+  description text NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE experiences(
+  id SERIAL,
+  name varchar(30) NOT NULL UNIQUE,
+  description text NOT NULL,
+  xp int,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE users(
+  id SERIAL,
+  username varchar(30) NOT NULL UNIQUE,
+  password varchar(30) NOT NULL,
+  class_id int NOT NULL REFERENCES classes (id),
+  created_at timestamp NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE users_items(
+  user_id int NOT NULL REFERENCES users (id),
+  item_id int NOT NULL REFERENCES items (id),
+  quantity int
+);
+
+CREATE TABLE users_experiences(
+  user_id int NOT NULL REFERENCES users (id),
+  experience_id int NOT NULL REFERENCES experiences (id)
+);
