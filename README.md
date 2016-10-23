@@ -52,7 +52,7 @@ As we're using Docker, our backend is completely portable! Just make sure to hav
  
 ## Database Schema
 The schema of the data, as represented in **Postgres**
-* **classes** - id:int, name:text, description:text
+* **classes** - id:int, name:varchar, description:text
 * **items** - id:int, name:varchar, description:text
 * **ais** - id:int, name:varchar, description:text
 * **experiences** - id:int, name:varchar, description:text, xp:int
