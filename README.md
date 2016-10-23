@@ -25,10 +25,10 @@ As we're using Docker, our backend is completely portable! Just make sure to hav
 
 * GET _/user/me/account_
   * Request Header: User's JWT Token
-  * Response: `{username:string, hp:int, xp:int, inventory:{string:int}}` 
+  * Response: `{username:string, hp:int, xp:int, inventory:[{id:int, name:varchar, description:text, quantity:int}]}` 
 * POST _/user/me/account_
   * Request Header: User's JWT Token
-  * Request Body `{username:string, hp:int, xp:int, inventory:{string:int}}`
+  * Request Body `{username:string, hp:int, xp:int, inventory:[{id:int, quantity:int}]`
 
 * POST _/maprender_
   * Request Header: User's JWT Token 
