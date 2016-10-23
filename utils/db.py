@@ -25,9 +25,10 @@ def relational_query(sql_query, parameters=None):
     db_cursor.execute(sql_query)
   else:
     db_cursor.execute(sql_query, parameters)
+  db.commit()
+  
   results = db_cursor.fetchall()
   
-  db.commit()
   db_cursor.close()
   db.close()
   return results

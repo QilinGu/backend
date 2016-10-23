@@ -1,6 +1,10 @@
 import functools
 import flask
 import utils
+import os
+
+
+JWT_TOKEN_SECRET = os.getenv("JWT_TOKEN_SECRET")
 
 
 '''
@@ -20,11 +24,13 @@ def auth_protected(decorated_function):
       return response
     
     try:
-      flask.g["jwt_token"] = utils.auth_token.decode(
-        utils.authorization_header_token(
+      token = utils.auth.auth_token_decode(
+        JWT_TOKEN_SECRET, 
+        utils.auth.authorization_header_token(
           auth_header
         )
       )
+      setattr(flask.g, "jwt_token", token)
     except (TypeError, ValueError) as e:
       response = flask.json.jsonify({
         "status": 400,

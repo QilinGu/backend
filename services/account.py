@@ -17,7 +17,7 @@ def get_user(user_id):
       users_items.description AS item_description, 
       users_items.quantity AS item_quantity
     FROM users 
-      JOIN (
+      LEFT JOIN (
         SELECT id, users_items.user_id AS user_id, 
           name, description, quantity 
         FROM items 
@@ -32,18 +32,20 @@ def get_user(user_id):
   if (len(result_list) == 0):
     return None
   
-  inventory_list = _.map(result_list, lambda _tuple: {
-    id: _tuple[3],
-    name: _tuple[4],
-    description: _tuple[5],
-    quantity: _tuple[6]
-  })
+  inventory_list = []
+  if result_list[0][3] is not None:
+    inventory_list = _.map_(result_list, lambda _tuple: {
+      "id": _tuple[3],
+      "name": _tuple[4],
+      "description": _tuple[5],
+      "quantity": _tuple[6]
+    })
   
   return {
-    username: result_list[0][0], 
-    hp: result_list[0][1], 
-    xp: result_list[0][2], 
-    inventory: inventory_list
+    "username": result_list[0][0], 
+    "hp": result_list[0][1], 
+    "xp": result_list[0][2], 
+    "inventory": inventory_list
   }
 
 

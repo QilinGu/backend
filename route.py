@@ -43,11 +43,19 @@ def login():
   
   jwt_token = None
   try:
-    jwt_token = login(username, password)
-  except:
+    jwt_token = auth.login(username, password)
+  except BaseException as e:
     response = json.jsonify({
       "status": 400,
       "message": str(e)
+    })
+    response.status_code = 400
+    return response
+  
+  if jwt_token is None:
+    response = json.jsonify({
+      "status": 400,
+      "message": "user doesn't exist or wrong password"
     })
     response.status_code = 400
     return response
@@ -60,7 +68,7 @@ def login():
 @app.route('/user/me/account', methods=['GET', 'POST'])
 @decorators.auth_protected
 def user_account():
-  jwt_token = g["jwt_token"]
+  jwt_token = g.jwt_token
   user_id = jwt_token.get("id")
   
   if user_id is None:

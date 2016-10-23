@@ -9,7 +9,7 @@ Obtains the JSON token stored on the Authorization Header
 @returns {string}
 '''
 def authorization_header_token(authorization_header):
-  if isinstance(authorization_header) is not basestring:
+  if not isinstance(authorization_header, basestring):
     raise TypeError("authorization_header must be a string")
   
   auth_header_token = authorization_header.replace('Bearer ', '')
@@ -29,9 +29,9 @@ Encodes the provided dict into a JWT Token. The payload
 @returns {string}
 '''
 def auth_token_encode(secret_key, payload_dict):
-  if isinstance(secret_key) is not basestring:
+  if not isinstance(secret_key, basestring):
     raise TypeError("secret_key must be a string")
-  if isinstance(payload_dict) is not dict:
+  if not isinstance(payload_dict, dict):
     raise TypeError("payload_dict must be a dict")
   
   return jwt.encode(payload_dict, secret_key, algorithm='HS256')
@@ -45,9 +45,9 @@ Decodes the provided JWT Token into a dict. The secret key
 @returns {string}
 '''
 def auth_token_decode(secret_key, encoded_string):
-  if isinstance(secret_key) is not basestring:
+  if not isinstance(secret_key, basestring):
     raise TypeError("secret_key must be a string")
-  if isinstance(encoded_string) is not basestring:
+  if not isinstance(encoded_string, basestring):
     raise TypeError("encoded_string must be a string")
   
   return jwt.decode(encoded_string, secret_key)

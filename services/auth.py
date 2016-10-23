@@ -33,7 +33,7 @@ def login(username, password):
     return None
     
   jwt_token_secret = os.getenv("JWT_TOKEN_SECRET", None)
-  return auth.auth_token_encode(jwt_token_secret, {
+  return utils.auth.auth_token_encode(jwt_token_secret, {
     "id": user_id, 
     "username": username
   })
