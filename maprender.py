@@ -3,9 +3,10 @@ from PIL import Image
 import requests
 from StringIO import StringIO
 import time
+import os
 
-#Get API key from config.txt file
-key = open('config.txt').read()
+#Get API key from .env
+key = os.getenv("GOOGLE_API_KEY")
 def get_map(location):
     #Get latitude, longitude from location dict
     lat  = location['latitude']
