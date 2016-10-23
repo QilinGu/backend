@@ -5,15 +5,16 @@ services:
     image: python:2.7.12
     container_name: "roam_backend"
     build: .
-    command: "python /roam/route.py"
+    command: "flask run --host=0.0.0.0"
     ports:
-      - "8000:8000"
+      - "8000:5000"
     links:
       - db_relational
       - db_inmemory
     volumes:
       - ".:/roam"
     restart: always
+    env_file: .env
   
   db_relational:
     image: mdillon/postgis:9.6
