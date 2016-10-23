@@ -30,7 +30,7 @@ CREATE TABLE experiences(
 CREATE TABLE users(
   id SERIAL,
   username varchar(30) NOT NULL UNIQUE,
-  password varchar(30) NOT NULL,
+  password varchar(72) NOT NULL,
   class_id int NOT NULL REFERENCES classes (id),
   created_at timestamp NOT NULL,
   PRIMARY KEY (id)
