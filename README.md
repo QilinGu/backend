@@ -28,13 +28,13 @@ As we're using Docker, our backend is completely portable! Just make sure to hav
   * Response: 
   ```
   {
-    username: string, 
-    hp: int, 
-    xp: int, 
-    inventory: [{
-      id: int, quantity: int, 
-      name: string, description: string 
-    }]
+      username: string, 
+      hp: int, 
+      xp: int, 
+      inventory: [{
+        id: int, quantity: int, 
+        name: string, description: string 
+      }]
   }
   ``` 
 * POST _/user/me/account_
@@ -42,14 +42,14 @@ As we're using Docker, our backend is completely portable! Just make sure to hav
   * Request Body 
   ```
   {
-    username: string, 
-    hp: int, 
-    xp: int, 
-    inventory: [{
-      id: int, quantity: int,
-      name: string, description: string
-    }],
-    xp_history: [int]
+      username: string, 
+      hp: int, 
+      xp: int, 
+      inventory: [{
+        id: int, quantity: int,
+        name: string, description: string
+      }],
+      xp_history: [int]
   }
   ```
 
@@ -59,17 +59,17 @@ As we're using Docker, our backend is completely portable! Just make sure to hav
   * Response: 
   ```
   {
-   image_url: string, 
-   weather: "sunny"|"rainy"|"cloudy", 
-   render_objects:[
-      {
-       type: "player"|"ai"|"marker"|"item", 
-       description: string, 
-       latitude: float,
-       longitude: float,
-       ...
-      }
-    ]
+     image_url: string, 
+     weather: "sunny"|"rainy"|"cloudy", 
+     render_objects:[
+        {
+         type: "player"|"ai"|"marker"|"item", 
+         description: string, 
+         latitude: float,
+         longitude: float,
+         ...
+        }
+      ]
   }
   ```
     
@@ -78,34 +78,34 @@ As we're using Docker, our backend is completely portable! Just make sure to hav
   * Request Body:
   ```
   {
-    x:int, 
-    y:int, 
-    {
-      latitude: float, 
-      longitude:float
-    }
+      x:int, 
+      y:int, 
+      {
+        latitude: float, 
+        longitude:float
+      }
   }
   ```
   * Response: 
   ```
   {
-   image_url: string, 
-   weather: "sunny"|"rainy"|"cloudy", 
-   render_objects:[
-      {
-       type: "player"|"ai"|"marker"|"item", 
-       description: string, 
-       latitude: float,
-       longitude: float,
-       ...
-      }
-    ]
+     image_url: string, 
+     weather: "sunny"|"rainy"|"cloudy", 
+     render_objects:[
+        {
+         type: "player"|"ai"|"marker"|"item", 
+         description: string, 
+         latitude: float,
+         longitude: float,
+         ...
+        }
+      ]
   }
   ```
     
 * GET _/items_
   * Response: items_schema as JSON
-* GET _experiences_
+* GET _/experiences_
   * Response: experiences_schema as JSON
  
 ## Database Schema
