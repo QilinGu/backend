@@ -50,3 +50,21 @@ CREATE TABLE users_experiences(
   experience_id int NOT NULL REFERENCES experiences (id),
   PRIMARY KEY (user_id, experience_id)
 );
+
+
+INSERT INTO classes (name, description) 
+VALUES (
+  'technician', 
+  'Quick to repair things and has a high knowledge rating'
+);
+
+INSERT INTO items (name, description) 
+VALUES (
+  'potion', 
+  'Health Potion'
+);
+INSERT INTO items (name, description) 
+VALUES (
+  'energy_pack', 
+  'Energy Pack'
+);
