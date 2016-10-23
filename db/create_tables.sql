@@ -40,9 +40,11 @@ CREATE TABLE users_items(
   user_id int NOT NULL REFERENCES users (id),
   item_id int NOT NULL REFERENCES items (id),
   quantity int
+  PRIMARY KEY (user_id, item_id)
 );
 
 CREATE TABLE users_experiences(
   user_id int NOT NULL REFERENCES users (id),
-  experience_id int NOT NULL REFERENCES experiences (id)
+  experience_id int NOT NULL REFERENCES experiences (id),
+  PRIMARY KEY (user_id, experience_id)
 );
