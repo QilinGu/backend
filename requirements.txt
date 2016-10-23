@@ -4,11 +4,13 @@ Flask==0.11.1
 itsdangerous==0.24
 Jinja2==2.8
 MarkupSafe==0.23
+Pillow==3.4.2
 psycopg2==2.6.2
 py-bcrypt==0.4
 pydash==3.4.5
 PyJWT==1.4.2
 pyowm==2.5.0
 redis==2.10.5
+requests==2.11.1
 virtualenv==15.0.3
 Werkzeug==0.11.11
