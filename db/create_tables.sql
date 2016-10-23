@@ -32,7 +32,9 @@ CREATE TABLE users(
   username varchar(30) NOT NULL UNIQUE,
   password varchar(72) NOT NULL,
   class_id int NOT NULL REFERENCES classes (id),
-  created_at timestamp NOT NULL,
+  created_at timestamp NOT NULL, 
+  xp int, 
+  hp int, 
   PRIMARY KEY (id)
 );
 
