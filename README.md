@@ -21,18 +21,41 @@ As we're using Docker, our backend is completely portable! Just make sure to hav
   * Response: `{status:int, message:"success"|"failure"}`
 * POST _/login_
   * Request Body: `{username:string, password:string}`
-  * Response: JWT Token that is then passed to the Auth-Header on subsequent requests to user-specific data
+  * Response: `{jwt_token:string}`
 
 * GET _/user/me/account_
   * Request Header: User's JWT Token
-  * Response: `{username:string, hp:int, xp:int, inventory:[{id:int, name:varchar, description:text, quantity:int}]}` 
+  * Response: 
+  ```
+  {
+    username: string, 
+    hp: int, 
+    xp: int, 
+    inventory: [{
+      id: int, quantity: int, 
+      name: string, description: string 
+    }]
+  }
+  ``` 
 * POST _/user/me/account_
   * Request Header: User's JWT Token
-  * Request Body `{username:string, hp:int, xp:int, inventory:[{id:int, quantity:int}]`
+  * Request Body 
+  ```
+  {
+    username: string, 
+    hp: int, 
+    xp: int, 
+    inventory: [{
+      id: int, quantity: int,
+      name: string, description: string
+    }],
+    xp_history: [int]
+  }
+  ```
 
 * POST _/maprender_
   * Request Header: User's JWT Token 
-  * Request Body: `{latitude:float, longitude:float, degrees_north:int, radius:int}`
+  * Request Body: `{latitude:float, longitude:float}`
   * Response: 
 	```
     {
@@ -49,6 +72,41 @@ As we're using Docker, our backend is completely portable! Just make sure to hav
       ]
     }
    	```
+    
+* POST _/mapupdate_
+  * Request Header: User's JWT Token
+  * Request Body:
+    ```
+    {
+      x:int, 
+      y:int, 
+      {
+        latitude: float, 
+        longitude:float
+      }
+    }
+    ```
+  * Response: 
+	```
+    {
+     image_url: string, 
+     weather: "sunny"|"rainy"|"cloudy", 
+     render_objects:[
+    	{
+         type: "player"|"ai"|"marker"|"item", 
+         description: string, 
+         latitude: float,
+         longitude: float,
+         ...
+        }
+      ]
+    }
+    ```
+    
+* GET _/items_
+  * Response: items_schema as JSON
+* GET _experiences_
+  * Response: experiences_schema as JSON
  
 ## Database Schema
 The schema of the data, as represented in **Postgres**
@@ -56,6 +114,6 @@ The schema of the data, as represented in **Postgres**
 * **items** - id:int, name:varchar, description:text
 * **ais** - id:int, name:varchar, description:text
 * **experiences** - id:int, name:varchar, description:text, xp:int
-* **users** - id:int, username:varchar, password:varchar, class_id:int, created_at:timestamp
+* **users** - id:int, username:varchar, password:varchar, class_id:int, created_at:timestamp, xp:int, hp:int 
 * **users_items** - user_id:int, item_id:int, quantity:int
 * **users_experiences** - user_id:int, experience_id:string
