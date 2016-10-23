@@ -50,43 +50,15 @@ def map_render(optional_loc=""):
 @app.route('/updatemap', methods=['POST'])
 def update_map():
     obj = json.loads(request.data)
-    where = obj['where']
-    prev = obj['prev']
-    add_lon = 0
-    add_lat = 0
-    #if statement to determine how much to add or subtract and from which direction
-    if where == "top":
-        add_lat = calc_distance_degrees(615,16)
-    elif where == "bottom":
-        add_lat = calc_distance_degrees(615,16) * -1
-    elif where == "left":
-        add_lon = calc_distance_degrees(640,16) * -1
-    elif where == "right":
-        add_lon = calc_distance_degrees(640,16)
-    elif where == "top-right":
-        add_lat = calc_distance_degrees(615,16)
-        add_lon = calc_distance_degrees(640,16)
-    elif where == "top-left":
-        add_lat = calc_distance_degrees(615,16)
-        add_lon = calc_distance_degrees(640,16) * -1
-    elif where == "bottom-left":
-        add_lat = calc_distance_degrees(615,16) * -1
-        add_lon = calc_distance_degrees(640,16) * -1
-    elif where == "bottom-right":
-        add_lat = calc_distance_degrees(615,16) * -1
-        add_lon = calc_distance_degrees(640,16) * -1
+    x = obj['x']
+    y = obj['y']
+    prev = obj['center']
+    add_lat = calc_distance_degrees(615,16) * y
+    add_lon = calc_distance_degrees(640,16) * x
+
     #Only return one map if top, left, bottom, or right
-    if add_lat==0 or add_lon==0:
-        res_map_dict = dict()
-        res_map_dict[where] = json.loads(map_render({'latitude': (prev['latitude'] + add_lat),'longitude': (prev['longitude'] + add_lon)}).data)
-        print res_map_dict[where]
-        return app.response_class(json.dumps((res_map_dict)), content_type='application/json')
-    #Otherwise return a dict with the three maps. The split happens at '-' in order to separate top-left into top and left for example
-    else:
-        return jsonify({where: map_render({'latitude': (prev['latitude'] + add_lat),'longitude': (prev['longitude'] + add_lon)}),
-                where.split('-')[0]: map_render({'latitude': (prev['latitude'] + add_lat),'longitude': (prev['longitude'])}),
-                where.split('-')[1]: map_render({'latitude': (prev['latitude']),'longitude': (prev['longitude'] + add_lon)})
-        })
+    res_map =  json.loads(map_render({'latitude': (prev['latitude'] + add_lat),'longitude': (prev['longitude'] + add_lon)}).data)
+    return app.response_class(json.dumps((res_map)), content_type='application/json')
 
 #given number of pixels and zoom level, calculate the distance in latitudinal or longitudinal degrees
 def calc_distance_degrees(distance,zoom):
