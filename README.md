@@ -28,9 +28,9 @@ As we're using Docker, our backend is completely portable! Just make sure to hav
   * Response: `{username:string, hp:int, xp:int, inventory:{string:int}}` 
 * POST _/user/me/account_
   * Request Header: User's JWT Token
-  * Response: `{username:string, hp:int, xp:int, inventory:{string:int}}`
+  * Request Body `{username:string, hp:int, xp:int, inventory:{string:int}}`
 
-* GET _/maprender_
+* POST _/maprender_
   * Request: User's JWT Token 
   * Request Body: `{latitude:float, longitude:float, degrees_north:int, radius:int}`
   * Response: 
