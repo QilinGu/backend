@@ -1,5 +1,6 @@
 from flask import Flask, g, request, json
-from services import auth, account, maprender 
+from services import auth, account, maprender
+from utils import weather
 import decorators
 
 
@@ -105,7 +106,10 @@ def maprender():
   
   res_map = maprender.get_new_map(x, y, center)
   render_objects = maprender.get_objects(15, center)
+  weather_info = weather.get_weather()
+  
   return json.jsonify({
-    "image_url": res_map,
-    "render_object": render_objects 
+    "image_url": res_map, 
+    "weather": weather_info, 
+    "render_objects": render_objects 
   })
