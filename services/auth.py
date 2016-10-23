@@ -59,8 +59,9 @@ def signup(username, password, class_id):
   try:
     utils.db.relational_query(
       """
-      INSERT INTO users (username, password, class_id, created_at) 
-      VALUES (%s, %s, %s, %s);
+      INSERT INTO users (username, password, class_id, 
+        created_at, xp, hp) 
+      VALUES (%s, %s, %s, %s, 0, 0);
       """,
       [username, hashed_password, class_id, datetime.datetime.now()]
     )

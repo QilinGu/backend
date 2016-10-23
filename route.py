@@ -23,10 +23,12 @@ def signup():
   try:
     auth.signup(username, password, class_id)
   except:
-    return json.jsonify({
+    response = json.jsonify({
       "status": 400,
       "message": "failure"
     })
+    response.status_code = 400
+    return response
   
   return json.jsonify({
     "status": 200,
@@ -43,10 +45,12 @@ def login():
   try:
     jwt_token = login(username, password)
   except:
-    return json.jsonify({
+    response = json.jsonify({
       "status": 400,
       "message": str(e)
     })
+    response.status_code = 400
+    return response
     
   return json.jsonify({
     "status": 200,
@@ -60,28 +64,34 @@ def user_account():
   user_id = jwt_token.get("id")
   
   if user_id is None:
-    return json.jsonify({
+    response = json.jsonify({
       "status": 400,
       "message": "user_id is required in JWT token"
     })
+    response.status_code = 400
+    return response
   
   if request.method == "GET":
     user_info = account.get_user(user_id)
     if user_info is None:
-      return json.jsonify({
+      response = json.jsonify({
         "status": 400,
         "message": "user does not exist"
       })
+      response.status_code = 400
+      return response
     
     return json.jsonify(user_info)
     
   if request.method == "POST":
     request_dict = request.get_json(force=True, silent=True)
     if not isinstance(request_dict, dict):
-      return json.jsonify({
+      response = json.jsonify({
         "status": 400,
         "message": "request_body not obtained"
       })
+      response.status_code = 400
+      return response
     
     account.update_user(user_id, request_dict)
     
@@ -95,10 +105,12 @@ def user_account():
 def maprender():
   request_dict = request.get_json(force=True, silent=True)
   if not isinstance(request_dict, dict):
-    return json.jsonify({
+    response = json.jsonify({
       "status": 400,
       "message": "request_body not obtained"
     })
+    response.status_code = 400
+    return response
   
   x = request_dict.get("x", 0)
   y = request_dict.get("y", 0)
