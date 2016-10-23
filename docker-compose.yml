@@ -1,0 +1,32 @@
+version: '2'
+services:
+
+  web:
+    image: python:2.7.12
+    container_name: "roam_backend"
+    build: .
+    command: "python /roam/route.py"
+    ports:
+      - "8000:8000"
+    links:
+      - db_relational
+      - db_inmemory
+    volumes:
+      - ".:/roam"
+    restart: always
+  
+  db_relational:
+    image: mdillon/postgis:9.6
+    container_name: "roam_postgres"
+    environment:
+      POSTGRES_DB: "roam"
+      POSTGRES_USER: "roam"
+      POSTGRES_PASSWORD: "roam"
+    volumes:
+      - "./db:/docker-entrypoint-initdb.d/"
+    restart: always
+    
+  db_inmemory:
+    image: redis:3.0.7
+    container_name: "roam_redis"
+    
